@@ -2,12 +2,18 @@ ESTADO_FINAL = "ESTADO FINAL"
 ESTADO_NO_FINAL = "NO ACEPTADO"
 ESTADO_TRAMPA = "EN ESTADO TRAMPA"
 
-def automata_igual(lexema):
+def automata_sentencia(lexema):
     estado = 0
-    estados_finales = [1]
-    delta = {0:{'=':1}}        
+    estados_finales = [1,2]
+    delta = {
+            0:{'<':2, '>':1, '=':1},
+            1: {'=':4},
+            2: {'>':3},
+            3: {'=':4},
+            4:{}             
+    }        
     for caracter in lexema:
-        if caracter in delta and estado in delta[caracter]:
+        if caracter in delta and estado in delta[estado]:
             estado = delta[estado][caracter]
         else:
             estado = -1

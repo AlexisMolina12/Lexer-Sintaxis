@@ -7,7 +7,7 @@ def automata_puntoYcoma(lexema):
     estados_finales = [1]
     delta = {0:{';':1}}        
     for caracter in lexema:
-        if caracter in delta and estado in delta[caracter]:
+        if caracter in delta and estado in delta[estado]:
             estado = delta[estado][caracter]
         else:
             estado = -1

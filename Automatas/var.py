@@ -2,7 +2,7 @@ ESTADO_FINAL = "ESTADO FINAL"
 ESTADO_NO_FINAL = "NO ACEPTADO"
 ESTADO_TRAMPA = "EN ESTADO TRAMPA"
 
-def automata_program(lexema):
+def automata_var(lexema):
     estado = 0
     estados_finales = [3]
     delta = {0:{'v':1},1:{'a':2},2:{'r':3},3:{}}

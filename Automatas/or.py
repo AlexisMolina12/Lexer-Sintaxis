@@ -4,7 +4,7 @@ ESTADO_TRAMPA = "EN ESTADO TRAMPA"
 
 def automata_or(lexema):
     estado = 0
-    estados_finales = [1]
+    estados_finales = [2]
     delta = {0:{'o':1},1:{'r':2},2:{}}
         
     for caracter in lexema:

@@ -4,13 +4,12 @@ ESTADO_TRAMPA = "EN ESTADO TRAMPA"
 
 def automata_sentencia(lexema):
     estado = 0
-    estados_finales = [1,2]
+    estados_finales = [1,2,3]
     delta = {
             0:{'<':2, '>':1, '=':1},
-            1: {'=':4},
-            2: {'>':3},
-            3: {'=':4},
-            4:{}             
+            1: {'=':3,},
+            2: {'>':3,'=':3},
+            3: {},     
     }        
     for caracter in lexema:
         if caracter in delta and estado in delta[estado]:

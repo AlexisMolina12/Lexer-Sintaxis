@@ -6,13 +6,13 @@ def automata_sentencia(lexema):
     estado = 0
     estados_finales = [1,2,3]
     delta = {
-            0:{'<':2, '>':1, '=':1},
+            0:{'<':2, '>':1, '=':1,'a':1},
             1: {'=':3,},
             2: {'>':3,'=':3},
             3: {},     
     }        
     for caracter in lexema:
-        if caracter in delta and estado in delta[estado]:
+        if caracter in delta[estado]:
             estado = delta[estado][caracter]
         else:
             estado = -1
@@ -23,5 +23,3 @@ def automata_sentencia(lexema):
         return ESTADO_FINAL
     else:
         return ESTADO_NO_FINAL
-    
-    

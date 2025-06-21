@@ -45,7 +45,7 @@ ESTADOS_POSIBLES = [
     ('TOKEN_TRES_PUNTOS',      automata_trespuntos),
     ('TOKEN_SUMA_RESTA',       automata_sumaresta),
     ('TOKEN_MULTIPLICACION',   automata_multiplicacion),
-    ('TOKEN_IGUAL',            automata_sentencia),
+    ('TOKEN_OP_RELACIONAL',    automata_sentencia),
     ('TOKEN_PARENTESIS_A',     automata_parentesisA),
     ('TOKEN_PARENTESIS_B',     automata_parentesisB),
     ('TOKEN_PUNTO_Y_COMA',     automata_puntoYcoma),
@@ -64,7 +64,7 @@ def lexer(codigo_fuente):
         lexema = ""
         var_aux_estado_trampa = False
 
-        while not var_aux_estado_trampa and pos_actual < len(codigo_fuente)+1:
+        while not var_aux_estado_trampa and pos_actual < len(codigo_fuente):
             var_aux_estado_trampa = True
             lexema = codigo_fuente[comienzo_lexema:pos_actual+1] # lexema es el codigo fuente desde el comienzo del lexema hasta la posicion actual
             posibles_tokens = posibles_token_mas_caracter #Al final del ciclo, el lexema aceptado DE MAYOR LONGITUD va a parar aca
@@ -77,7 +77,8 @@ def lexer(codigo_fuente):
                 elif simulacion_automata == ESTADO_NO_FINAL:
                     var_aux_estado_trampa = False
             pos_actual = pos_actual + 1 #se incrementa la pos actual, hasta que todos los automatas caigan en trampa(el ultimo que cae en estado trampa es el automata id)
-
+        if var_aux_estado_trampa:
+            lexema = codigo_fuente[comienzo_lexema:pos_actual-1]
         if len(posibles_tokens) == 0: #Sucede si el lexema no fue aceptado por ningun automata
             raise Exception("ERROR: TOKEN NO CONOCIDO: " + lexema)
         un_token = posibles_tokens[0] #Se toma el primer elemento por convencion. Esto sucede si mas de un automata acepta el mismo lexema 
@@ -88,7 +89,7 @@ def lexer(codigo_fuente):
         tokens.append(token)
     return tokens #devolvemos el listado de tokens
 
-print(lexer("123asdasd asdasda sadasd"))
+print(lexer('=<'))
                                       
                     
 

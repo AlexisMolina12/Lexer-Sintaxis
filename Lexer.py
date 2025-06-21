@@ -64,7 +64,7 @@ def lexer(codigo_fuente):
         lexema = ""
         var_aux_estado_trampa = False
 
-        while not var_aux_estado_trampa and pos_actual < len(codigo_fuente):
+        while not var_aux_estado_trampa and pos_actual < len(codigo_fuente)+1:
             var_aux_estado_trampa = True
             lexema = codigo_fuente[comienzo_lexema:pos_actual+1] # lexema es el codigo fuente desde el comienzo del lexema hasta la posicion actual
             posibles_tokens = posibles_token_mas_caracter #Al final del ciclo, el lexema aceptado DE MAYOR LONGITUD va a parar aca

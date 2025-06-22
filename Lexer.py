@@ -77,9 +77,14 @@ def lexer(codigo_fuente):
                 elif simulacion_automata == ESTADO_NO_FINAL:
                     var_aux_estado_trampa = False
             pos_actual = pos_actual + 1 #se incrementa la pos actual, hasta que todos los automatas caigan en trampa(el ultimo que cae en estado trampa es el automata id)
-        if var_aux_estado_trampa:
+        if var_aux_estado_trampa and automata_espacio(lexema[-1]) != ESTADO_FINAL: #si ningun automata vivio con la cadena lexema y ademas si el ultimo caracter del lexema es distino del automata "espacio", luego la cadena no es valida, osea TOKEN NO RECONOCIDO, ej: "==="  
+            posibles_tokens = []
             lexema = codigo_fuente[comienzo_lexema:pos_actual-1]
+        elif pos_actual == len(codigo_fuente):
+            posibles_tokens = posibles_token_mas_caracter
+            lexema = codigo_fuente[comienzo_lexema:pos_actual+1]
         if len(posibles_tokens) == 0: #Sucede si el lexema no fue aceptado por ningun automata
+            lexema = codigo_fuente[comienzo_lexema:pos_actual+1]
             raise Exception("ERROR: TOKEN NO CONOCIDO: " + lexema)
         un_token = posibles_tokens[0] #Se toma el primer elemento por convencion. Esto sucede si mas de un automata acepta el mismo lexema 
         
@@ -89,8 +94,4 @@ def lexer(codigo_fuente):
         tokens.append(token)
     return tokens #devolvemos el listado de tokens
 
-print(lexer('=<'))
-                                      
-                    
-
-
+print(lexer('a < b'))
